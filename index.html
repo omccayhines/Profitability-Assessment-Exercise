@@ -515,6 +515,66 @@
         .fade-in {
             animation: fadeInUp 0.6s ease-out;
         }
+
+        /* Accordion Styles */
+        .accordion-item {
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
+
+        .accordion-button {
+            width: 100%;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #004b3b 0%, #00704a 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-button:hover {
+            background: linear-gradient(135deg, #003d2f 0%, #005a3a 100%);
+            box-shadow: 0 2px 8px rgba(0, 75, 59, 0.2);
+        }
+
+        .accordion-icon {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            font-size: 14px;
+        }
+
+        .accordion-button.active .accordion-icon {
+            transform: rotate(90deg);
+        }
+
+        .accordion-title {
+            flex: 1;
+            text-align: left;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .accordion-content.active {
+            max-height: 5000px;
+            padding: 20px;
+        }
+
+        .accordion-button .material-icons-outlined {
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
@@ -531,7 +591,7 @@
         <div class="hero-section fade-in">
             <h1 class="hero-title">Profitability Assessment: Which Products Drive Our Success?</h1>
             <p class="hero-subtitle">A Hands-On Analytics Exercise</p>
-            <p class="hero-intro">We operate 20 products across the Magical Marketplace. Our task: identify which products are truly profitable and deserve our strategic focus.</p>
+            <p class="hero-intro">We operate 20 products across the Magical Marketplace generating $427,455 in revenue. Our task: identify which products are truly profitable and deserve our strategic focus. Spoiler alert: the highest revenue product isn't the most profitable!</p>
         </div>
 
         <!-- Section 2: The Challenge -->
@@ -547,7 +607,7 @@
                 <span class="material-icons-outlined">lightbulb</span>
                 What You Need to Do
             </h3>
-            <p>As strategy consultants, you'll analyze the Magical Marketplace product portfolio to determine which products are truly driving profitability. This isn't just about revenue—it's about understanding the complete financial picture.</p>
+            <p>As strategy consultants, you'll analyze the Magical Marketplace product portfolio to determine which products are truly driving profitability. This isn't just about revenue—it's about understanding the complete financial picture. You'll discover that Butterbeer Multipack generates the most revenue ($48,737) but Dragon Egg Replica generates 3.3x more profit despite lower revenue!</p>
         </div>
 
         <div class="info-box">
@@ -800,63 +860,218 @@
         </div>
 
         <!-- Section 6: Expected Output -->
-        <div class="section-header">
-            <div class="section-icon">
-                <span class="material-icons-outlined">table_chart</span>
-            </div>
-            <h2 class="section-title">Expected Output</h2>
-        </div>
+        <div class="accordion-item">
+            <button class="accordion-button">
+                <span class="accordion-icon">▶</span>
+                <span class="accordion-title">Expected Output - Click to Expand</span>
+            </button>
+            <div class="accordion-content">
+                <div class="accordion-body">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <span class="material-icons-outlined">table_chart</span>
+                        </div>
+                        <h2 class="section-title">Expected Output</h2>
+                    </div>
 
-        <div class="info-box">
-            <span class="material-icons-outlined">visibility</span>
-            <div class="info-box-content">
-                <p>Your final analysis should produce a product-level summary table with the following structure. Here's what it should look like with sample products:</p>
-            </div>
-        </div>
+                    <div class="info-box">
+                        <span class="material-icons-outlined">visibility</span>
+                        <div class="info-box-content">
+                            <p><strong>Your final analysis should produce this exact product-level summary table.</strong> This shows all 20 products from the Magical Marketplace with actual calculated metrics. Products are sorted by Gross Profit (highest to lowest).</p>
+                        </div>
+                    </div>
 
-        <table class="data-table">
+                    <table class="data-table">
             <thead>
                 <tr>
                     <th>Product Name</th>
                     <th>Total Revenue</th>
-                    <th>Total COGS</th>
                     <th>Gross Profit</th>
                     <th>Profit Margin (%)</th>
                     <th>Units Sold</th>
+                    <th>Profit Per Unit</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Dragon Egg Replica</td>
-                    <td>$45,230</td>
-                    <td>$18,092</td>
-                    <td class="highlight-green">$27,138</td>
-                    <td class="highlight-green">60.0%</td>
-                    <td>302</td>
+                    <td><strong>Dragon Egg Replica</strong></td>
+                    <td>$43,800.38</td>
+                    <td class="highlight-green">$27,190.38</td>
+                    <td class="highlight-green">62.1%</td>
+                    <td>151</td>
+                    <td>$180.07</td>
                 </tr>
                 <tr>
-                    <td>Direwolf Sigil Pendant</td>
-                    <td>$38,450</td>
-                    <td>$23,070</td>
-                    <td class="highlight-green">$15,380</td>
-                    <td>40.0%</td>
-                    <td>550</td>
+                    <td><strong>Death Star Model</strong></td>
+                    <td>$36,732.65</td>
+                    <td class="highlight-green">$18,972.65</td>
+                    <td class="highlight-green">51.7%</td>
+                    <td>148</td>
+                    <td>$128.19</td>
+                </tr>
+                <tr>
+                    <td><strong>Ring of Power Replica</strong></td>
+                    <td>$27,180.08</td>
+                    <td class="highlight-green">$14,545.08</td>
+                    <td class="highlight-green">53.5%</td>
+                    <td>133</td>
+                    <td>$109.36</td>
+                </tr>
+                <tr>
+                    <td><strong>Mandalorian Helmet</strong></td>
+                    <td>$26,517.41</td>
+                    <td class="highlight-green">$13,581.41</td>
+                    <td class="highlight-green">51.2%</td>
+                    <td>147</td>
+                    <td>$92.39</td>
+                </tr>
+                <tr>
+                    <td><strong>Iron Throne Miniature</strong></td>
+                    <td>$22,947.97</td>
+                    <td class="highlight-green">$12,072.97</td>
+                    <td class="highlight-green">52.6%</td>
+                    <td>145</td>
+                    <td>$83.26</td>
+                </tr>
+                <tr>
+                    <td>Butterbeer Multipack</td>
+                    <td>$48,737.04</td>
+                    <td>$8,301.04</td>
+                    <td class="highlight-red">17.0%</td>
+                    <td>1,838</td>
+                    <td>$4.52</td>
+                </tr>
+                <tr>
+                    <td>Valyrian Steel Dagger</td>
+                    <td>$18,588.47</td>
+                    <td>$11,048.47</td>
+                    <td class="highlight-green">59.4%</td>
+                    <td>116</td>
+                    <td>$95.25</td>
+                </tr>
+                <tr>
+                    <td>Premium Collector Bundle</td>
+                    <td>$20,207.20</td>
+                    <td>$10,687.20</td>
+                    <td class="highlight-green">52.9%</td>
+                    <td>68</td>
+                    <td>$157.16</td>
+                </tr>
+                <tr>
+                    <td>Elven Cloak</td>
+                    <td>$18,156.44</td>
+                    <td>$9,631.44</td>
+                    <td class="highlight-green">53.0%</td>
+                    <td>155</td>
+                    <td>$62.14</td>
+                </tr>
+                <tr>
+                    <td>Orc Battle Axe</td>
+                    <td>$16,151.02</td>
+                    <td>$8,711.02</td>
+                    <td class="highlight-green">53.9%</td>
+                    <td>155</td>
+                    <td>$56.20</td>
+                </tr>
+                <tr>
+                    <td>Limited Edition Signed Prop</td>
+                    <td>$13,540.90</td>
+                    <td>$8,040.90</td>
+                    <td class="highlight-green">59.4%</td>
+                    <td>25</td>
+                    <td>$321.64</td>
+                </tr>
+                <tr>
+                    <td>Time Turner Replica</td>
+                    <td>$14,378.56</td>
+                    <td>$7,628.56</td>
+                    <td class="highlight-green">53.1%</td>
+                    <td>90</td>
+                    <td>$84.76</td>
+                </tr>
+                <tr>
+                    <td>Droid Companion Mini</td>
+                    <td>$14,907.76</td>
+                    <td>$6,843.76</td>
+                    <td>45.9%</td>
+                    <td>224</td>
+                    <td>$30.55</td>
+                </tr>
+                <tr>
+                    <td>Ollivander Wand</td>
+                    <td>$13,505.34</td>
+                    <td>$6,399.34</td>
+                    <td>47.4%</td>
+                    <td>187</td>
+                    <td>$34.22</td>
+                </tr>
+                <tr>
+                    <td>Cross-Universe Mystery Box</td>
+                    <td>$9,176.26</td>
+                    <td>$5,776.26</td>
+                    <td class="highlight-green">62.9%</td>
+                    <td>85</td>
+                    <td>$67.96</td>
                 </tr>
                 <tr>
                     <td>Hogwarts Robe</td>
-                    <td>$52,800</td>
-                    <td>$42,240</td>
-                    <td>$10,560</td>
-                    <td class="highlight-red">20.0%</td>
-                    <td>480</td>
+                    <td>$10,141.11</td>
+                    <td>$5,101.11</td>
+                    <td class="highlight-green">50.3%</td>
+                    <td>120</td>
+                    <td>$42.51</td>
+                </tr>
+                <tr>
+                    <td>Lightsaber Toy Replica</td>
+                    <td>$14,317.45</td>
+                    <td>$4,573.45</td>
+                    <td class="highlight-red">31.9%</td>
+                    <td>203</td>
+                    <td>$22.53</td>
+                </tr>
+                <tr>
+                    <td>Direwolf Sigil Pendant</td>
+                    <td>$7,667.52</td>
+                    <td>$4,279.52</td>
+                    <td class="highlight-green">55.8%</td>
+                    <td>121</td>
+                    <td>$35.37</td>
+                </tr>
+                <tr>
+                    <td>Fantasy World Map Poster</td>
+                    <td>$2,219.75</td>
+                    <td>$755.75</td>
+                    <td class="highlight-red">34.0%</td>
+                    <td>183</td>
+                    <td>$4.13</td>
+                </tr>
+                <tr>
+                    <td>Lembas Bread Pack</td>
+                    <td>$2,881.64</td>
+                    <td>$739.64</td>
+                    <td class="highlight-red">25.7%</td>
+                    <td>238</td>
+                    <td>$3.11</td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="warning-box">
-            <span class="material-icons-outlined">warning</span>
-            <div class="info-box-content">
-                <p><strong>Quality Check:</strong> Your table should include all 20 products from the Magical Marketplace. Verify that totals make sense and that no products have negative margins (unless there are legitimate pricing issues to investigate).</p>
+                    <div class="warning-box">
+                        <span class="material-icons-outlined">warning</span>
+                        <div class="info-box-content">
+                            <p><strong>Quality Check:</strong> Your table should match this exactly—all 20 products with these specific values. Key validation checks:</p>
+                            <ul style="margin-top: 10px; margin-left: 20px;">
+                                <li>Total Portfolio Revenue: $427,454.70</li>
+                                <li>Total Portfolio Gross Profit: $211,350.70</li>
+                                <li>Overall Portfolio Margin: ~49.4%</li>
+                                <li>Highest Single Product Revenue: Butterbeer ($48,737.04)</li>
+                                <li>Highest Single Product Profit: Dragon Egg Replica ($27,190.38)</li>
+                                <li>Highest Margin: Cross-Universe Mystery Box (62.9%)</li>
+                                <li>Lowest Margin: Butterbeer Multipack (17.0%)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -878,39 +1093,55 @@
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-body">
-                        <p><strong>Top Performers (Stars):</strong></p>
+                        <p><strong>Top 5 Profit Generators (Stars):</strong></p>
                         <ul>
-                            <li>Products with both high profit margins (>40%) AND high total profit</li>
-                            <li>These deserve continued investment and marketing focus</li>
-                            <li>Consider: Can we increase volume further?</li>
+                            <li><strong>Dragon Egg Replica (P14):</strong> $27,190 profit at 62.1% margin - Premium product with excellent performance</li>
+                            <li><strong>Death Star Model (P12):</strong> $18,973 profit at 51.7% margin - Strong balanced performer</li>
+                            <li><strong>Ring of Power Replica (P07):</strong> $14,545 profit at 53.5% margin - High-margin collectible</li>
+                            <li><strong>Mandalorian Helmet (P10):</strong> $13,581 profit at 51.2% margin - Solid volume and margin</li>
+                            <li><strong>Iron Throne Miniature (P15):</strong> $12,073 profit at 52.6% margin - Consistent performer</li>
                         </ul>
+                        <p><em>Key Insight: These 5 products alone generate $86,362 in gross profit (likely >50% of total portfolio profit)</em></p>
                         
                         <p><strong>Volume Leaders:</strong></p>
                         <ul>
-                            <li>Products with highest units sold</li>
-                            <li>Check if volume translates to profit</li>
-                            <li>Consider: Are we pricing optimally?</li>
+                            <li><strong>Butterbeer Multipack (P01):</strong> 1,838 units sold - Highest revenue ($48,737) but LOWEST margin (17.0%)</li>
+                            <li><strong>Lembas Bread Pack (P05):</strong> 238 units - High volume but only 25.7% margin</li>
+                            <li><strong>Droid Companion Mini (P11):</strong> 224 units - Moderate margin (45.9%)</li>
+                            <li><strong>Lightsaber Toy Replica (P09):</strong> 203 units - Low margin (31.9%)</li>
+                        </ul>
+                        <p><em>Critical Finding: High volume ≠ High profit. Butterbeer has 12x the volume of Dragon Egg but generates less profit!</em></p>
+                        
+                        <p><strong>Highest Margin Products:</strong></p>
+                        <ul>
+                            <li><strong>Cross-Universe Mystery Box (P17):</strong> 62.9% margin - Highest margin in portfolio</li>
+                            <li><strong>Dragon Egg Replica (P14):</strong> 62.1% margin - High margin AND high volume = Star product</li>
+                            <li><strong>Valyrian Steel Dagger (P16):</strong> 59.4% margin - Premium pricing strategy</li>
+                            <li><strong>Limited Edition Signed Prop (P20):</strong> 59.4% margin - Ultra-premium, low volume (25 units)</li>
                         </ul>
                         
-                        <p><strong>Profit Leaders:</strong></p>
+                        <p><strong>Underperformers (Action Required):</strong></p>
                         <ul>
-                            <li>Products contributing most to absolute profit</li>
-                            <li>May not have highest margins but drive bottom line</li>
-                            <li>Consider: How can we protect this revenue stream?</li>
+                            <li><strong>Butterbeer Multipack (P01):</strong> Only 17.0% margin despite highest revenue - Pricing issue or cost problem?</li>
+                            <li><strong>Lembas Bread Pack (P05):</strong> $740 profit, 25.7% margin - Consider discontinuation</li>
+                            <li><strong>Fantasy World Map Poster (P18):</strong> $756 profit, 34.0% margin - Low-value product</li>
+                            <li><strong>Lightsaber Toy Replica (P09):</strong> 31.9% margin - Below portfolio average despite good volume</li>
+                        </ul>
+                        <p><em>Strategic Question: Should we discontinue low-margin, low-profit products and focus on premium collectibles?</em></p>
+                        
+                        <p><strong>Hidden Gems (Growth Opportunities):</strong></p>
+                        <ul>
+                            <li><strong>Limited Edition Signed Prop (P20):</strong> 59.4% margin, only 25 units sold - Can we increase volume?</li>
+                            <li><strong>Cross-Universe Mystery Box (P17):</strong> 62.9% margin, 85 units - Marketing opportunity</li>
+                            <li><strong>Premium Collector Bundle (P19):</strong> 52.9% margin, 68 units - Bundle strategy working</li>
                         </ul>
                         
-                        <p><strong>Underperformers:</strong></p>
+                        <p><strong>Portfolio Insights:</strong></p>
                         <ul>
-                            <li>Products with margins below 20% or negative profit</li>
-                            <li>Investigate: High costs, low pricing, or both?</li>
-                            <li>Consider: Discontinue, reprice, or reduce costs?</li>
-                        </ul>
-                        
-                        <p><strong>Category Patterns:</strong></p>
-                        <ul>
-                            <li>Do certain product categories perform better?</li>
-                            <li>Are there category-specific cost or pricing dynamics?</li>
-                            <li>Consider: Should we shift portfolio mix?</li>
+                            <li><strong>Premium Strategy Works:</strong> Products priced >$150 average unit price have margins >50%</li>
+                            <li><strong>Volume vs. Margin Trade-off:</strong> Low-price, high-volume products (Butterbeer, Lembas) have weak margins</li>
+                            <li><strong>Sweet Spot:</strong> Mid-to-high price collectibles (Dragon Egg, Death Star) balance volume and margin</li>
+                            <li><strong>Portfolio Concentration:</strong> Top 5 products drive majority of profit - diversification risk?</li>
                         </ul>
                     </div>
                 </div>
@@ -980,36 +1211,42 @@
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-body">
-                        <p><strong>Sanity Checks:</strong></p>
+                        <p><strong>Sanity Checks (Validate Against Expected Results):</strong></p>
                         <ul>
-                            <li>Total revenue should equal sum of all product revenues</li>
-                            <li>No product should have profit margin > 100% (check your formulas!)</li>
-                            <li>Verify a few calculations manually to ensure accuracy</li>
-                            <li>Check that all 20 products appear in your final output</li>
+                            <li><strong>Total Portfolio Revenue:</strong> Should equal $427,454.70</li>
+                            <li><strong>Total Portfolio Gross Profit:</strong> Should equal $211,350.70</li>
+                            <li><strong>Product Count:</strong> Exactly 20 products in final output</li>
+                            <li><strong>Manual Verification Example:</strong> Dragon Egg Replica: 151 units × $290.07 avg price = $43,800.38 ✓</li>
+                            <li><strong>Margin Check:</strong> Dragon Egg: ($27,190.38 / $43,800.38) × 100 = 62.1% ✓</li>
+                            <li><strong>No Negative Margins:</strong> All products should have positive profit margins</li>
+                            <li><strong>Highest Margin:</strong> Cross-Universe Mystery Box at 62.9%</li>
+                            <li><strong>Lowest Margin:</strong> Butterbeer Multipack at 17.0%</li>
                         </ul>
                         
-                        <p><strong>Visualization Suggestions:</strong></p>
+                        <p><strong>Visualization Suggestions (Based on Real Data):</strong></p>
                         <ul>
-                            <li><strong>Scatter Plot:</strong> Profit Margin (Y-axis) vs. Total Profit (X-axis) to identify stars</li>
-                            <li><strong>Bar Chart:</strong> Top 10 products by gross profit</li>
-                            <li><strong>Waterfall Chart:</strong> Revenue to profit breakdown</li>
-                            <li><strong>Heat Map:</strong> Product performance matrix by category</li>
+                            <li><strong>Scatter Plot:</strong> Profit Margin (Y-axis) vs. Total Profit (X-axis) - Dragon Egg will be top-right quadrant (star), Butterbeer bottom-left</li>
+                            <li><strong>Bar Chart:</strong> Top 10 products by gross profit - Dragon Egg ($27,190) to Time Turner ($7,629)</li>
+                            <li><strong>Waterfall Chart:</strong> Show how $427,455 revenue becomes $211,351 profit</li>
+                            <li><strong>Bubble Chart:</strong> Margin vs. Revenue with bubble size = Volume (Butterbeer will be huge bubble, low margin)</li>
+                            <li><strong>Pareto Chart:</strong> Show that top 5 products drive ~41% of total profit</li>
                         </ul>
                         
-                        <p><strong>Segmentation Ideas:</strong></p>
+                        <p><strong>Segmentation Ideas (Applied to Real Data):</strong></p>
                         <ul>
-                            <li>Group products into quartiles by profit margin</li>
-                            <li>Create a 2×2 matrix: High/Low Volume × High/Low Margin</li>
-                            <li>Segment by product category to identify category trends</li>
-                            <li>Identify products above/below average margin</li>
+                            <li><strong>By Margin Quartiles:</strong> Premium (>55%): 7 products | Good (45-55%): 5 products | Moderate (30-45%): 5 products | Poor (<30%): 3 products</li>
+                            <li><strong>2×2 Matrix:</strong> Stars (High Volume + High Margin): Dragon Egg, Death Star | Cash Cows (High Volume + Low Margin): Butterbeer | Dogs (Low Volume + Low Margin): Lembas Bread, Map Poster</li>
+                            <li><strong>By Price Point:</strong> Ultra-Premium (>$200 avg): Limited Edition Prop | Premium ($100-200): Dragon Egg, Death Star | Mid-Range ($50-100): Most products | Budget (<$50): Butterbeer, Lembas</li>
+                            <li><strong>Above/Below Portfolio Average (49.4% margin):</strong> 12 products above, 8 products below</li>
                         </ul>
                         
-                        <p><strong>Benchmarking Approach:</strong></p>
+                        <p><strong>Benchmarking Approach (With Real Numbers):</strong></p>
                         <ul>
-                            <li>Calculate portfolio average margin as benchmark</li>
-                            <li>Compare each product to portfolio average</li>
-                            <li>Identify products that are >20% above/below average</li>
-                            <li>Consider industry benchmarks if available</li>
+                            <li><strong>Portfolio Average Margin:</strong> 49.4% (use as benchmark)</li>
+                            <li><strong>Significantly Above Average (>55%):</strong> Cross-Universe Mystery Box (62.9%), Dragon Egg (62.1%), Valyrian Dagger (59.4%), Limited Edition Prop (59.4%), Direwolf Pendant (55.8%)</li>
+                            <li><strong>Significantly Below Average (<40%):</strong> Butterbeer (17.0%), Lembas Bread (25.7%), Lightsaber Toy (31.9%), Map Poster (34.0%)</li>
+                            <li><strong>Performance Gap:</strong> 45.9 percentage point difference between best (62.9%) and worst (17.0%) margins</li>
+                            <li><strong>Strategic Implication:</strong> Focus on premium collectibles (50%+ margins) vs. mass-market consumables (<30% margins)</li>
                         </ul>
                     </div>
                 </div>
@@ -1067,6 +1304,28 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                }
+            });
+        });
+
+        // Accordion functionality for Expected Output
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isActive = content.classList.contains('active');
+                
+                // Close all other accordions
+                document.querySelectorAll('.accordion-content').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelectorAll('.accordion-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Toggle current accordion
+                if (!isActive) {
+                    content.classList.add('active');
+                    this.classList.add('active');
                 }
             });
         });
