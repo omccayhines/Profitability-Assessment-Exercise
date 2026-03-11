@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profitability Assessment Exercise - Deloitte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        :root {
+            --deloitte-green: #86BC25;
+            --deloitte-dark-green: #046A38;
+            --deloitte-black: #000000;
+            --deloitte-gray: #53565A;
+            --deloitte-light-gray: #A0A0A0;
+            --deloitte-bg-gray: #F5F5F5;
+            --deloitte-white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            background: #ffffff;
+            color: #2c2c2c;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6, p, li, span, div, strong {
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+        }
+
+        /* Fixed Header */
+        .slide-header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: #000000;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .deloitte-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .deloitte-logo img {
+            height: 22px;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px 60px 40px;
+            min-width: 0;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 60px 0 40px 0;
+            background: linear-gradient(135deg, rgba(134, 188, 37, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
+            border-radius: 12px;
+            margin-bottom: 50px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 300;
+            color: var(--deloitte-black);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            word-break: break-word;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: var(--deloitte-green);
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        .hero-intro {
+            font-size: 18px;
+            color: var(--deloitte-gray);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 50px 0 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--deloitte-bg-gray);
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(134, 188, 37, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .section-icon .material-icons-outlined {
+            font-size: 28px;
+            color: var(--deloitte-green);
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--deloitte-black);
+        }
+
+        /* Challenge Card */
+        .challenge-card {
+            background: white;
+            border-left: 4px solid var(--deloitte-green);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .challenge-card h3 {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--deloitte-dark-green);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .challenge-card h3 .material-icons-outlined {
+            color: var(--deloitte-green);
+        }
+
+        .challenge-card p {
+            font-size: 16px;
+            color: var(--deloitte-gray);
+            line-height: 1.7;
+        }
+
+        /* Key Pointers Grid */
+        .pointers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .pointer-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            min-width: 0;
+        }
+
+        .pointer-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .pointer-number {
+            width: 40px;
+            height: 40px;
+            background: var(--deloitte-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            flex-shrink: 0;
+        }
+
+        .pointer-card h3 {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--deloitte-black);
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
+
+        .pointer-card p {
+            font-size: 15px;
+            color: var(--deloitte-gray);
+            line-height: 1.6;
+        }
+
+        /* Accordion Styles */
+        .accordion-container {
+            margin-bottom: 40px;
+        }
+
+        .accordion-item {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 25px;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s ease;
+            min-width: 0;
+        }
+
+        .accordion-header:hover {
+            background: rgba(134, 188, 37, 0.03);
+        }
+
+        .accordion-header.active {
+            background: rgba(134, 188, 37, 0.05);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .accordion-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .accordion-step-number {
+            width: 35px;
+            height: 35px;
+            background: var(--deloitte-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .accordion-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--deloitte-black);
+            word-break: break-word;
+        }
+
+        .accordion-icon {
+            color: var(--deloitte-green);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .accordion-icon.active {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 2000px;
+        }
+
+        .accordion-body {
+            padding: 25px;
+            background: rgba(245, 245, 245, 0.3);
+        }
+
+        .accordion-body p {
+            font-size: 15px;
+            color: var(--deloitte-gray);
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        .accordion-body ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .accordion-body li {
+            font-size: 15px;
+            color: var(--deloitte-gray);
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .accordion-body strong {
+            color: var(--deloitte-dark-green);
+            font-weight: 600;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .data-table thead {
+            background: var(--deloitte-dark-green);
+            color: white;
+        }
+
+        .data-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            color: var(--deloitte-gray);
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(134, 188, 37, 0.03);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .highlight-green {
+            color: var(--deloitte-green);
+            font-weight: 600;
+        }
+
+        .highlight-red {
+            color: #d32f2f;
+            font-weight: 600;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #f8f8f8;
+            border-left: 4px solid var(--deloitte-green);
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: var(--deloitte-black);
+            overflow-x: auto;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, rgba(134, 188, 37, 0.08) 0%, rgba(134, 188, 37, 0.03) 100%);
+            border-left: 4px solid var(--deloitte-green);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .info-box .material-icons-outlined {
+            color: var(--deloitte-green);
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .info-box-content p {
+            font-size: 15px;
+            color: var(--deloitte-gray);
+            line-height: 1.7;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.08) 0%, rgba(255, 152, 0, 0.03) 100%);
+            border-left: 4px solid #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .warning-box .material-icons-outlined {
+            color: #ff9800;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .pointers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 38px;
+            }
+
+            .main-container {
+                padding: 70px 30px 50px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-header-bar {
+                height: 40px;
+                padding: 0 20px;
+            }
+
+            .deloitte-logo img {
+                height: 18px;
+            }
+
+            .main-container {
+                padding: 60px 20px 40px 20px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 20px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .pointers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .data-table {
+                font-size: 12px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 600px), (max-height: 500px) {
+            .pointers-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="slide-header-bar">
+        <div class="deloitte-logo">
+            <img src="https://www.deloitte.com/content/dam/assets-shared/logos/svg/a-d/deloitte.svg" alt="Deloitte">
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <div class="hero-section fade-in">
+            <h1 class="hero-title">Profitability Assessment: Which Products Drive Our Success?</h1>
+            <p class="hero-subtitle">A Hands-On Analytics Exercise</p>
+            <p class="hero-intro">We operate 20 products across the Magical Marketplace. Our task: identify which products are truly profitable and deserve our strategic focus.</p>
+        </div>
+
+        <!-- Section 2: The Challenge -->
+        <div class="section-header">
+            <div class="section-icon">
+                <span class="material-icons-outlined">flag</span>
+            </div>
+            <h2 class="section-title">The Challenge</h2>
+        </div>
+
+        <div class="challenge-card">
+            <h3>
+                <span class="material-icons-outlined">lightbulb</span>
+                What You Need to Do
+            </h3>
+            <p>As strategy consultants, you'll analyze the Magical Marketplace product portfolio to determine which products are truly driving profitability. This isn't just about revenue—it's about understanding the complete financial picture.</p>
+        </div>
+
+        <div class="info-box">
+            <span class="material-icons-outlined">info</span>
+            <div class="info-box-content">
+                <p><strong>Why This Matters:</strong> Revenue tells only part of the story. A high-revenue product with equally high costs may be less valuable than a moderate-revenue product with excellent margins. Your analysis will reveal which products deserve strategic investment and which may need reconsideration.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Key Pointers -->
+        <div class="section-header">
+            <div class="section-icon">
+                <span class="material-icons-outlined">stars</span>
+            </div>
+            <h2 class="section-title">Key Pointers</h2>
+        </div>
+
+        <div class="pointers-grid">
+            <div class="pointer-card">
+                <div class="pointer-number">1</div>
+                <h3>Gather the Right Data</h3>
+                <p>Product costs, sales prices, and volumes are your foundation. Ensure data quality and completeness before analysis.</p>
+            </div>
+            <div class="pointer-card">
+                <div class="pointer-number">2</div>
+                <h3>Calculate What Matters</h3>
+                <p>Revenue first, then profit per unit and margins. Each metric reveals different insights about product performance.</p>
+            </div>
+            <div class="pointer-card">
+                <div class="pointer-number">3</div>
+                <h3>Ask the Right Question</h3>
+                <p>Which products maximize our profitability? Consider both absolute profit and profit margins in your assessment.</p>
+            </div>
+        </div>
+
+        <!-- Section 4: High-Level Business Steps -->
+        <div class="section-header">
+            <div class="section-icon">
+                <span class="material-icons-outlined">account_tree</span>
+            </div>
+            <h2 class="section-title">High-Level Business Steps</h2>
+        </div>
+
+        <div class="accordion-container">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-step-number">1</div>
+                        <div class="accordion-title">Define Your Business Question</div>
+                    </div>
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Primary Question:</strong> Which products in our Magical Marketplace portfolio are most profitable?</p>
+                        <p><strong>Sub-Questions to Consider:</strong></p>
+                        <ul>
+                            <li>Which products generate the highest total profit?</li>
+                            <li>Which products have the best profit margins?</li>
+                            <li>Are high-volume products also high-profit products?</li>
+                            <li>Which products underperform and why?</li>
+                        </ul>
+                        <p>Clear business questions guide your entire analysis and ensure actionable insights.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-step-number">2</div>
+                        <div class="accordion-title">Gather the Right Data</div>
+                    </div>
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Required Data Sources:</strong></p>
+                        <ul>
+                            <li><strong>Product Master Data:</strong> Product names, categories, and identifiers</li>
+                            <li><strong>Cost Data:</strong> Unit cost for each product (COGS)</li>
+                            <li><strong>Sales Transactions:</strong> Sales price, quantity sold, transaction dates</li>
+                            <li><strong>Currency Information:</strong> Exchange rates if dealing with multiple currencies</li>
+                        </ul>
+                        <p><strong>Data Quality Checks:</strong> Verify completeness, check for duplicates, validate currency conversions, and ensure consistent product identifiers across datasets.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-step-number">3</div>
+                        <div class="accordion-title">Calculate Revenue First</div>
+                    </div>
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Formula:</strong> Revenue = Sales Price × Quantity Sold</p>
+                        <p><strong>Implementation in Power Query:</strong></p>
+                        <ul>
+                            <li>Create a custom column for revenue calculation</li>
+                            <li>Ensure consistent currency (convert if necessary)</li>
+                            <li>Aggregate at the product level (sum of all transactions)</li>
+                        </ul>
+                        <p><strong>Why Start Here:</strong> Revenue provides the baseline for understanding product performance and is essential for calculating profitability metrics.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-step-number">4</div>
+                        <div class="accordion-title">Calculate Cost of Goods Sold (COGS)</div>
+                    </div>
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Formula:</strong> COGS = Unit Cost × Quantity Sold</p>
+                        <p><strong>Key Considerations:</strong></p>
+                        <ul>
+                            <li>Merge product cost data with sales transactions</li>
+                            <li>Ensure unit costs are in the same currency as sales prices</li>
+                            <li>Calculate total COGS per product across all transactions</li>
+                        </ul>
+                        <p><strong>Common Pitfall:</strong> Forgetting to account for volume—a low unit cost can still result in high total COGS if sales volume is substantial.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-step-number">5</div>
+                        <div class="accordion-title">Calculate Gross Profit</div>
+                    </div>
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Formula:</strong> Gross Profit = Revenue - COGS</p>
+                        <p><strong>What This Tells You:</strong></p>
+                        <ul>
+                            <li>Absolute profitability of each product</li>
+                            <li>Which products contribute most to bottom line</li>
+                            <li>Total profit contribution across the portfolio</li>
+                        </ul>
+                        <p><strong>Analysis Tip:</strong> Sort products by gross profit to identify your top performers. These are your profit leaders that deserve strategic focus.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-step-number">6</div>
+                        <div class="accordion-title">Calculate Profit Margin</div>
+                    </div>
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Formula:</strong> Profit Margin (%) = (Gross Profit ÷ Revenue) × 100</p>
+                        <p><strong>Why Margins Matter:</strong></p>
+                        <ul>
+                            <li>Reveals efficiency independent of scale</li>
+                            <li>Identifies products with best return on sales</li>
+                            <li>Enables comparison across different product sizes</li>
+                        </ul>
+                        <p><strong>Strategic Insight:</strong> A product with lower absolute profit but higher margin may be more strategically valuable, especially if it has growth potential.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-step-number">7</div>
+                        <div class="accordion-title">Analyze & Interpret</div>
+                    </div>
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Key Analysis Questions:</strong></p>
+                        <ul>
+                            <li>Which products are both high-volume AND high-margin? (Stars)</li>
+                            <li>Which products have high volume but low margins? (Cash cows or problem products)</li>
+                            <li>Which products have high margins but low volume? (Growth opportunities)</li>
+                            <li>Which products are underperforming on both dimensions? (Candidates for discontinuation)</li>
+                        </ul>
+                        <p><strong>Deliverable:</strong> Create a clear summary table and visualization showing product performance across all key metrics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Power Query Quick Reference -->
+        <div class="section-header">
+            <div class="section-icon">
+                <span class="material-icons-outlined">code</span>
+            </div>
+            <h2 class="section-title">Power Query Quick Reference</h2>
+        </div>
+
+        <div class="accordion-container">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-title">Power Query Implementation Steps</div>
+                    </div>
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>1. Load Your Data Tables:</strong></p>
+                        <ul>
+                            <li>Import Sales Transactions table</li>
+                            <li>Import Product Master table (with costs)</li>
+                            <li>Import Currency Exchange table (if needed)</li>
+                        </ul>
+                        
+                        <p><strong>2. Key Merge Operations:</strong></p>
+                        <ul>
+                            <li><strong>Merge Sales with Products:</strong> Left join on Product ID to bring in cost data</li>
+                            <li><strong>Merge with Currency:</strong> If needed, join on currency code to get exchange rates</li>
+                        </ul>
+                        
+                        <p><strong>3. Calculated Columns to Create:</strong></p>
+                        <ul>
+                            <li><strong>Revenue:</strong> [Sales Price] × [Quantity]</li>
+                            <li><strong>COGS:</strong> [Unit Cost] × [Quantity]</li>
+                            <li><strong>Gross Profit:</strong> [Revenue] - [COGS]</li>
+                            <li><strong>Profit Margin:</strong> ([Gross Profit] / [Revenue]) × 100</li>
+                        </ul>
+                        
+                        <p><strong>4. Aggregation Approach:</strong></p>
+                        <ul>
+                            <li>Group by Product Name/ID</li>
+                            <li>Sum: Revenue, COGS, Gross Profit</li>
+                            <li>Count: Number of transactions</li>
+                            <li>Calculate: Average profit margin</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Expected Output -->
+        <div class="section-header">
+            <div class="section-icon">
+                <span class="material-icons-outlined">table_chart</span>
+            </div>
+            <h2 class="section-title">Expected Output</h2>
+        </div>
+
+        <div class="info-box">
+            <span class="material-icons-outlined">visibility</span>
+            <div class="info-box-content">
+                <p>Your final analysis should produce a product-level summary table with the following structure. Here's what it should look like with sample products:</p>
+            </div>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Total Revenue</th>
+                    <th>Total COGS</th>
+                    <th>Gross Profit</th>
+                    <th>Profit Margin (%)</th>
+                    <th>Units Sold</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dragon Egg Replica</td>
+                    <td>$45,230</td>
+                    <td>$18,092</td>
+                    <td class="highlight-green">$27,138</td>
+                    <td class="highlight-green">60.0%</td>
+                    <td>302</td>
+                </tr>
+                <tr>
+                    <td>Direwolf Sigil Pendant</td>
+                    <td>$38,450</td>
+                    <td>$23,070</td>
+                    <td class="highlight-green">$15,380</td>
+                    <td>40.0%</td>
+                    <td>550</td>
+                </tr>
+                <tr>
+                    <td>Hogwarts Robe</td>
+                    <td>$52,800</td>
+                    <td>$42,240</td>
+                    <td>$10,560</td>
+                    <td class="highlight-red">20.0%</td>
+                    <td>480</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <span class="material-icons-outlined">warning</span>
+            <div class="info-box-content">
+                <p><strong>Quality Check:</strong> Your table should include all 20 products from the Magical Marketplace. Verify that totals make sense and that no products have negative margins (unless there are legitimate pricing issues to investigate).</p>
+            </div>
+        </div>
+
+        <!-- Section 7: Key Insights to Look For -->
+        <div class="section-header">
+            <div class="section-icon">
+                <span class="material-icons-outlined">insights</span>
+            </div>
+            <h2 class="section-title">Key Insights to Look For</h2>
+        </div>
+
+        <div class="accordion-container">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-title">Analysis Dimensions</div>
+                    </div>
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Top Performers (Stars):</strong></p>
+                        <ul>
+                            <li>Products with both high profit margins (>40%) AND high total profit</li>
+                            <li>These deserve continued investment and marketing focus</li>
+                            <li>Consider: Can we increase volume further?</li>
+                        </ul>
+                        
+                        <p><strong>Volume Leaders:</strong></p>
+                        <ul>
+                            <li>Products with highest units sold</li>
+                            <li>Check if volume translates to profit</li>
+                            <li>Consider: Are we pricing optimally?</li>
+                        </ul>
+                        
+                        <p><strong>Profit Leaders:</strong></p>
+                        <ul>
+                            <li>Products contributing most to absolute profit</li>
+                            <li>May not have highest margins but drive bottom line</li>
+                            <li>Consider: How can we protect this revenue stream?</li>
+                        </ul>
+                        
+                        <p><strong>Underperformers:</strong></p>
+                        <ul>
+                            <li>Products with margins below 20% or negative profit</li>
+                            <li>Investigate: High costs, low pricing, or both?</li>
+                            <li>Consider: Discontinue, reprice, or reduce costs?</li>
+                        </ul>
+                        
+                        <p><strong>Category Patterns:</strong></p>
+                        <ul>
+                            <li>Do certain product categories perform better?</li>
+                            <li>Are there category-specific cost or pricing dynamics?</li>
+                            <li>Consider: Should we shift portfolio mix?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 8: Common Pitfalls -->
+        <div class="section-header">
+            <div class="section-icon">
+                <span class="material-icons-outlined">error_outline</span>
+            </div>
+            <h2 class="section-title">Common Pitfalls</h2>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Pitfall</th>
+                    <th>Why It Happens</th>
+                    <th>How to Avoid</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Currency Conversion Mistakes</strong></td>
+                    <td>Mixing currencies without conversion or using wrong exchange rates</td>
+                    <td>Standardize all values to one currency early; verify exchange rates are current</td>
+                </tr>
+                <tr>
+                    <td><strong>Revenue vs. Profit Confusion</strong></td>
+                    <td>Focusing only on revenue without considering costs</td>
+                    <td>Always calculate and compare both metrics; remember high revenue ≠ high profit</td>
+                </tr>
+                <tr>
+                    <td><strong>Transaction vs. Product Level</strong></td>
+                    <td>Analyzing individual transactions instead of aggregating by product</td>
+                    <td>Use Group By in Power Query to aggregate at product level</td>
+                </tr>
+                <tr>
+                    <td><strong>Ignoring Volume</strong></td>
+                    <td>Looking at unit metrics without considering total volume impact</td>
+                    <td>Analyze both per-unit margins AND total profit contribution</td>
+                </tr>
+                <tr>
+                    <td><strong>Missing Data Joins</strong></td>
+                    <td>Incomplete merges leaving products without cost data</td>
+                    <td>Check for null values after merges; investigate unmatched records</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Section 9: Pro Tips -->
+        <div class="section-header">
+            <div class="section-icon">
+                <span class="material-icons-outlined">emoji_objects</span>
+            </div>
+            <h2 class="section-title">Pro Tips</h2>
+        </div>
+
+        <div class="accordion-container">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-title">Advanced Analysis Techniques</div>
+                    </div>
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Sanity Checks:</strong></p>
+                        <ul>
+                            <li>Total revenue should equal sum of all product revenues</li>
+                            <li>No product should have profit margin > 100% (check your formulas!)</li>
+                            <li>Verify a few calculations manually to ensure accuracy</li>
+                            <li>Check that all 20 products appear in your final output</li>
+                        </ul>
+                        
+                        <p><strong>Visualization Suggestions:</strong></p>
+                        <ul>
+                            <li><strong>Scatter Plot:</strong> Profit Margin (Y-axis) vs. Total Profit (X-axis) to identify stars</li>
+                            <li><strong>Bar Chart:</strong> Top 10 products by gross profit</li>
+                            <li><strong>Waterfall Chart:</strong> Revenue to profit breakdown</li>
+                            <li><strong>Heat Map:</strong> Product performance matrix by category</li>
+                        </ul>
+                        
+                        <p><strong>Segmentation Ideas:</strong></p>
+                        <ul>
+                            <li>Group products into quartiles by profit margin</li>
+                            <li>Create a 2×2 matrix: High/Low Volume × High/Low Margin</li>
+                            <li>Segment by product category to identify category trends</li>
+                            <li>Identify products above/below average margin</li>
+                        </ul>
+                        
+                        <p><strong>Benchmarking Approach:</strong></p>
+                        <ul>
+                            <li>Calculate portfolio average margin as benchmark</li>
+                            <li>Compare each product to portfolio average</li>
+                            <li>Identify products that are >20% above/below average</li>
+                            <li>Consider industry benchmarks if available</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="margin-top: 60px; padding-top: 30px; border-top: 2px solid var(--deloitte-bg-gray); text-align: center;">
+            <p style="color: var(--deloitte-light-gray); font-size: 14px;">Deloitte Data Analytics Learning Session | Magical Marketplace Case Study</p>
+            <p style="color: var(--deloitte-light-gray); font-size: 12px; margin-top: 10px;">© 2025 Deloitte Consulting. For educational purposes.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+            
+            // Close all other accordions
+            const allItems = document.querySelectorAll('.accordion-item');
+            allItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    const otherContent = otherItem.querySelector('.accordion-content');
+                    const otherIcon = otherItem.querySelector('.accordion-icon');
+                    const otherHeader = otherItem.querySelector('.accordion-header');
+                    
+                    otherContent.classList.remove('active');
+                    otherIcon.classList.remove('active');
+                    otherHeader.classList.remove('active');
+                }
+            });
+            
+            // Toggle current accordion
+            const isActive = content.classList.contains('active');
+            
+            if (isActive) {
+                content.classList.remove('active');
+                icon.classList.remove('active');
+                header.classList.remove('active');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('active');
+                header.classList.add('active');
+            }
+        }
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
