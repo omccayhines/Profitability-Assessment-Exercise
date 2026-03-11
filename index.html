@@ -861,12 +861,13 @@
 
         <!-- Section 6: Expected Output -->
         <div class="accordion-item">
-            <button class="accordion-button">
-                <span class="accordion-icon">▶</span>
-                <span class="accordion-title">Expected Output - Click to Expand</span>
-            </button>
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-title-wrapper">
+                    <span class="material-icons-outlined accordion-icon">expand_more</span>
+                    <div class="accordion-title">Expected Output - Click to Expand</div>
+                </div>
+            </div>
             <div class="accordion-content">
-                <div class="accordion-body">
                     <div class="section-header">
                         <div class="section-icon">
                             <span class="material-icons-outlined">table_chart</span>
@@ -1071,7 +1072,6 @@
                             </ul>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
 
