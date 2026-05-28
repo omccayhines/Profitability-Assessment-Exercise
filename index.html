@@ -393,6 +393,7 @@
             margin: 15px 0;
             font-family: 'Courier New', monospace;
             font-size: 13px;
+            white-space: pre-wrap;
             color: var(--deloitte-black);
             overflow-x: auto;
         }
@@ -638,8 +639,8 @@
             </div>
             <div class="pointer-card">
                 <div class="pointer-number">3</div>
-                <h3>Ask the Right Question</h3>
-                <p>Which products maximize our profitability? Consider both absolute profit and profit margins in your assessment.</p>
+                <h3>Revenue Is Not Profit</h3>
+                <p>The biggest seller is rarely the biggest earner. Judge products on profit and margin, not revenue &mdash; that gap is the whole point of the exercise.</p>
             </div>
         </div>
 
@@ -656,21 +657,21 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="accordion-title-wrapper">
                         <div class="accordion-step-number">1</div>
-                        <div class="accordion-title">Define Your Business Question</div>
+                        <div class="accordion-title">Define the business question</div>
                     </div>
                     <span class="material-icons-outlined accordion-icon">expand_more</span>
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-body">
-                        <p><strong>Primary Question:</strong> Which products in our Magical Marketplace portfolio are most profitable?</p>
-                        <p><strong>Sub-Questions to Consider:</strong></p>
-                        <ul>
-                            <li>Which products generate the highest total profit?</li>
-                            <li>Which products have the best profit margins?</li>
-                            <li>Are high-volume products also high-profit products?</li>
-                            <li>Which products underperform and why?</li>
-                        </ul>
-                        <p>Clear business questions guide your entire analysis and ensure actionable insights.</p>
+<p><strong>Primary question:</strong> which products in the Magical Marketplace portfolio are most profitable, and where should the business focus?</p>
+<p><strong>Sub-questions to keep in mind:</strong></p>
+<ul>
+<li>Which products generate the most absolute profit?</li>
+<li>Which products earn the best margin (profit per pound of revenue)?</li>
+<li>Are the high-revenue products also the high-profit ones, or not?</li>
+<li>Which products underperform, and is it a cost problem or a pricing problem?</li>
+</ul>
+<p>A clear question keeps the analysis pointed at a decision rather than just producing numbers.</p>
                     </div>
                 </div>
             </div>
@@ -679,20 +680,20 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="accordion-title-wrapper">
                         <div class="accordion-step-number">2</div>
-                        <div class="accordion-title">Gather the Right Data</div>
+                        <div class="accordion-title">Gather the right data</div>
                     </div>
                     <span class="material-icons-outlined accordion-icon">expand_more</span>
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-body">
-                        <p><strong>Required Data Sources:</strong></p>
-                        <ul>
-                            <li><strong>Product Master Data:</strong> Product names, categories, and identifiers</li>
-                            <li><strong>Cost Data:</strong> Unit cost for each product (COGS)</li>
-                            <li><strong>Sales Transactions:</strong> Sales price, quantity sold, transaction dates</li>
-                            <li><strong>Currency Information:</strong> Exchange rates if dealing with multiple currencies</li>
-                        </ul>
-                        <p><strong>Data Quality Checks:</strong> Verify completeness, check for duplicates, validate currency conversions, and ensure consistent product identifiers across datasets.</p>
+<p>Four tables hold everything you need. Identify them before touching Power Query:</p>
+<ul>
+<li><strong>Fact_Sales</strong> &mdash; the transactions: quantity and local unit price per product sold.</li>
+<li><strong>Dim_Product</strong> &mdash; product names and the standard unit cost (your COGS input).</li>
+<li><strong>Dim_Realm</strong> &mdash; tells you which currency each sale was made in.</li>
+<li><strong>Dim_FX</strong> &mdash; the exchange rate to convert local currency into USD.</li>
+</ul>
+<p><strong>Sense-check the data:</strong> sales are recorded in local currency, not USD, and there is no ready-made revenue column. Both have to be derived.</p>
                     </div>
                 </div>
             </div>
@@ -701,20 +702,14 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="accordion-title-wrapper">
                         <div class="accordion-step-number">3</div>
-                        <div class="accordion-title">Calculate Revenue First</div>
+                        <div class="accordion-title">Convert to a common currency and build revenue</div>
                     </div>
                     <span class="material-icons-outlined accordion-icon">expand_more</span>
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-body">
-                        <p><strong>Formula:</strong> Revenue = Sales Price × Quantity Sold</p>
-                        <p><strong>Implementation in Power Query:</strong></p>
-                        <ul>
-                            <li>Create a custom column for revenue calculation</li>
-                            <li>Ensure consistent currency (convert if necessary)</li>
-                            <li>Aggregate at the product level (sum of all transactions)</li>
-                        </ul>
-                        <p><strong>Why Start Here:</strong> Revenue provides the baseline for understanding product performance and is essential for calculating profitability metrics.</p>
+<p><strong>Concept:</strong> Revenue = Quantity &times; Unit Price, expressed in USD.</p>
+<p>Prices sit in four different magical currencies, so totalling them as-is would be meaningless. Bring each realm's currency and its FX rate alongside the transactions, then calculate revenue per transaction in USD. Getting every line into one currency <em>before</em> aggregating is the step people most often skip.</p>
                     </div>
                 </div>
             </div>
@@ -723,20 +718,14 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="accordion-title-wrapper">
                         <div class="accordion-step-number">4</div>
-                        <div class="accordion-title">Calculate Cost of Goods Sold (COGS)</div>
+                        <div class="accordion-title">Aggregate to product level</div>
                     </div>
                     <span class="material-icons-outlined accordion-icon">expand_more</span>
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-body">
-                        <p><strong>Formula:</strong> COGS = Unit Cost × Quantity Sold</p>
-                        <p><strong>Key Considerations:</strong></p>
-                        <ul>
-                            <li>Merge product cost data with sales transactions</li>
-                            <li>Ensure unit costs are in the same currency as sales prices</li>
-                            <li>Calculate total COGS per product across all transactions</li>
-                        </ul>
-                        <p><strong>Common Pitfall:</strong> Forgetting to account for volume—a low unit cost can still result in high total COGS if sales volume is substantial.</p>
+<p>The decision is about products, so collapse 2,500 transaction lines into one row per product, summing revenue and units sold.</p>
+<p>This is the shift from raw data to a decision-ready view: 20 rows you can actually compare, rank and act on.</p>
                     </div>
                 </div>
             </div>
@@ -745,20 +734,14 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="accordion-title-wrapper">
                         <div class="accordion-step-number">5</div>
-                        <div class="accordion-title">Calculate Gross Profit</div>
+                        <div class="accordion-title">Calculate cost of goods sold</div>
                     </div>
                     <span class="material-icons-outlined accordion-icon">expand_more</span>
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-body">
-                        <p><strong>Formula:</strong> Gross Profit = Revenue - COGS</p>
-                        <p><strong>What This Tells You:</strong></p>
-                        <ul>
-                            <li>Absolute profitability of each product</li>
-                            <li>Which products contribute most to bottom line</li>
-                            <li>Total profit contribution across the portfolio</li>
-                        </ul>
-                        <p><strong>Analysis Tip:</strong> Sort products by gross profit to identify your top performers. These are your profit leaders that deserve strategic focus.</p>
+<p><strong>Concept:</strong> COGS = Units Sold &times; Standard Unit Cost.</p>
+<p>COGS is the variable cost of the products that actually sold. Pull the unit cost from Dim_Product and multiply by the quantity for each product. This is what separates revenue from real earnings.</p>
                     </div>
                 </div>
             </div>
@@ -767,20 +750,14 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="accordion-title-wrapper">
                         <div class="accordion-step-number">6</div>
-                        <div class="accordion-title">Calculate Profit Margin</div>
+                        <div class="accordion-title">Calculate gross profit and margin</div>
                     </div>
                     <span class="material-icons-outlined accordion-icon">expand_more</span>
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-body">
-                        <p><strong>Formula:</strong> Profit Margin (%) = (Gross Profit ÷ Revenue) × 100</p>
-                        <p><strong>Why Margins Matter:</strong></p>
-                        <ul>
-                            <li>Reveals efficiency independent of scale</li>
-                            <li>Identifies products with best return on sales</li>
-                            <li>Enables comparison across different product sizes</li>
-                        </ul>
-                        <p><strong>Strategic Insight:</strong> A product with lower absolute profit but higher margin may be more strategically valuable, especially if it has growth potential.</p>
+<p><strong>Concepts:</strong> Gross Profit = Revenue &minus; COGS, and Profit Margin = Gross Profit &divide; Revenue.</p>
+<p>You need both. Absolute profit tells you how much money a product makes; margin tells you how efficiently it makes it. A product can lead on one and lag badly on the other &mdash; that contrast is the whole point of the exercise.</p>
                     </div>
                 </div>
             </div>
@@ -789,20 +766,19 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="accordion-title-wrapper">
                         <div class="accordion-step-number">7</div>
-                        <div class="accordion-title">Analyze & Interpret</div>
+                        <div class="accordion-title">Analyse and interpret</div>
                     </div>
                     <span class="material-icons-outlined accordion-icon">expand_more</span>
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-body">
-                        <p><strong>Key Analysis Questions:</strong></p>
-                        <ul>
-                            <li>Which products are both high-volume AND high-margin? (Stars)</li>
-                            <li>Which products have high volume but low margins? (Cash cows or problem products)</li>
-                            <li>Which products have high margins but low volume? (Growth opportunities)</li>
-                            <li>Which products are underperforming on both dimensions? (Candidates for discontinuation)</li>
-                        </ul>
-                        <p><strong>Deliverable:</strong> Create a clear summary table and visualization showing product performance across all key metrics.</p>
+<p>Rank products by profit and by margin, and look at where the two disagree:</p>
+<ul>
+<li><strong>Stars</strong> &mdash; high profit and high margin: protect and grow these.</li>
+<li><strong>Volume earners</strong> &mdash; high revenue but thin margin: profit depends on selling a lot; watch costs closely.</li>
+<li><strong>Underperformers</strong> &mdash; low on both: question whether they earn their place.</li>
+</ul>
+<p>The headline insight to land: the highest-revenue product is not the most profitable one. Revenue alone is a misleading basis for a focus decision.</p>
                     </div>
                 </div>
             </div>
@@ -826,35 +802,55 @@
                 </div>
                 <div class="accordion-content">
                     <div class="accordion-body">
-                        <p><strong>1. Load Your Data Tables:</strong></p>
-                        <ul>
-                            <li>Import Sales Transactions table</li>
-                            <li>Import Product Master table (with costs)</li>
-                            <li>Import Currency Exchange table (if needed)</li>
-                        </ul>
-                        
-                        <p><strong>2. Key Merge Operations:</strong></p>
-                        <ul>
-                            <li><strong>Merge Sales with Products:</strong> Left join on Product ID to bring in cost data</li>
-                            <li><strong>Merge with Currency:</strong> If needed, join on currency code to get exchange rates</li>
-                        </ul>
-                        
-                        <p><strong>3. Calculated Columns to Create:</strong></p>
-                        <ul>
-                            <li><strong>Revenue:</strong> [Sales Price] × [Quantity]</li>
-                            <li><strong>COGS:</strong> [Unit Cost] × [Quantity]</li>
-                            <li><strong>Gross Profit:</strong> [Revenue] - [COGS]</li>
-                            <li><strong>Profit Margin:</strong> ([Gross Profit] / [Revenue]) × 100</li>
-                        </ul>
-                        
-                        <p><strong>4. Aggregation Approach:</strong></p>
-                        <ul>
-                            <li>Group by Product Name/ID</li>
-                            <li>Sum: Revenue, COGS, Gross Profit</li>
-                            <li>Count: Number of transactions</li>
-                            <li>Calculate: Average profit margin</li>
-                        </ul>
-                    </div>
+<p style="margin-bottom:18px;">Follow these steps in order. Each one names the exact ribbon path, the dialog settings to use, and a one-line reason. By the end you will have a query called <strong>Profitability Assessment</strong> that matches the Expected Output table below. The data starts as six raw tables; you only need three of them here: <strong>Fact_Sales</strong>, <strong>Dim_Realm</strong>, <strong>Dim_FX</strong> and <strong>Dim_Product</strong>.</p>
+
+<p><strong>Step 1 &mdash; Load Fact_Sales into Power Query</strong></p>
+<p style="margin:6px 0 4px;"><em>Click path:</em> Select any cell in the Fact_Sales table &rarr; <strong>Data</strong> tab &rarr; <strong>From Table/Range</strong>. The Power Query Editor opens.</p>
+<p style="margin:0 0 14px;"><em>Why:</em> Fact_Sales is the transaction grain (one row per product sold). Every revenue and profit number is built up from here.</p>
+
+<p><strong>Step 2 &mdash; Bring in each realm's currency</strong></p>
+<p style="margin:6px 0 4px;"><em>Click path:</em> <strong>Home</strong> &rarr; <strong>Merge Queries</strong>. Set the top table to the current query, pick <code>RealmID</code> as the match column; set the bottom table to <strong>Dim_Realm</strong>, pick <code>RealmID</code>. Join Kind = <strong>Left Outer</strong> &rarr; OK. On the new <code>Dim_Realm</code> column click the <strong>expand</strong> icon (two arrows) and tick only <code>CurrencyCode</code>.</p>
+<p style="margin:0 0 14px;"><em>Why:</em> Sales prices are in local currency but Fact_Sales doesn't say which. The realm decides the currency, so you pull <code>CurrencyCode</code> across first.</p>
+
+<p><strong>Step 3 &mdash; Bring in the FX rate</strong></p>
+<p style="margin:6px 0 4px;"><em>Click path:</em> <strong>Merge Queries</strong> again. Match <code>Dim_Realm.CurrencyCode</code> to <strong>Dim_FX</strong>'s <code>CurrencyCode</code>, Left Outer &rarr; OK. Expand the new column and tick only <code>RateToReportingCurrency</code>.</p>
+<p style="margin:0 0 14px;"><em>Why:</em> This is the multiplier that converts a local price into USD. Keep only the one rate column so the table stays clean.</p>
+
+<p><strong>Step 4 &mdash; Calculate revenue per transaction (USD)</strong></p>
+<p style="margin:6px 0 4px;"><em>Click path:</em> <strong>Add Column</strong> &rarr; <strong>Custom Column</strong>. Name it <code>Revenue USD</code> and enter the formula below.</p>
+<div class="code-block">[Quantity] * [UnitPriceLocal] * [Dim_FX.RateToReportingCurrency]</div>
+<p style="margin:0 0 14px;"><em>Why:</em> Revenue = units &times; price, then converted to USD. Doing it per transaction keeps every currency correct before you total anything.</p>
+
+<p><strong>Step 5 &mdash; Total revenue and units for each product</strong></p>
+<p style="margin:6px 0 4px;"><em>Click path:</em> <strong>Home</strong> &rarr; <strong>Group By</strong>. Group by <code>ProductID</code>. Add two aggregations: <code>Revenue</code> = <strong>Sum</strong> of <code>Revenue USD</code>; <code>Quantity</code> = <strong>Sum</strong> of <code>Quantity</code>.</p>
+<p style="margin:0 0 14px;"><em>Why:</em> The question is about products, not individual sales. Group By collapses 2,500 transaction rows down to one row per product.</p>
+
+<p><strong>Step 6 &mdash; Bring in the product name and unit cost</strong></p>
+<p style="margin:6px 0 4px;"><em>Click path:</em> <strong>Merge Queries</strong> &rarr; match <code>ProductID</code> to <strong>Dim_Product</strong>'s <code>ProductID</code>, Left Outer. Expand and tick <code>ProductName</code> and <code>StandardUnitCostUSD</code>.</p>
+<p style="margin:0 0 14px;"><em>Why:</em> You need the readable name for the output and the unit cost to work out COGS in the next step.</p>
+
+<p><strong>Step 7 &mdash; Calculate COGS, Profit and Profit Margin</strong></p>
+<p style="margin:6px 0 4px;"><em>Click path:</em> Add three Custom Columns (<strong>Add Column</strong> &rarr; <strong>Custom Column</strong>), one after another:</p>
+<div class="code-block">// Column "COGS"
+[Quantity] * [Dim_Product.StandardUnitCostUSD]
+
+// Column "Profit"
+[Revenue] - [COGS]
+
+// Column "Profit margin"
+[Profit] / [Revenue]</div>
+<p style="margin:6px 0 4px;"><em>Then:</em> click the <code>Profit margin</code> column header's data-type icon and set it to <strong>Percentage</strong>.</p>
+<p style="margin:0 0 14px;"><em>Why:</em> COGS is total cost of what sold. Profit is the absolute money made; margin is profit as a share of revenue. You need both &mdash; a product can have high profit but a weak margin, or the reverse.</p>
+
+<p><strong>Step 8 &mdash; Sort and finish</strong></p>
+<p style="margin:6px 0 4px;"><em>Click path:</em> Click the <code>Profit</code> column dropdown &rarr; <strong>Sort Descending</strong>. Then <strong>Home</strong> &rarr; <strong>Close &amp; Load</strong>.</p>
+<p style="margin:0 0 6px;"><em>Why:</em> Sorting by profit puts your top performers at the top so the recommendation reads straight off the table.</p>
+
+<div class="info-box" style="margin-top:16px;">
+<span class="material-icons-outlined">check_circle</span>
+<div class="info-box-content"><p><strong>Check your result:</strong> 20 product rows, total Revenue <strong>$381,755</strong>, total Profit <strong>$184,880</strong>, blended margin <strong>48.4%</strong>. Dragon Egg Replica (P14) should be top on Profit at <strong>$27,190</strong>.</p></div>
+</div>
+</div>
                 </div>
             </div>
         </div>
@@ -1101,7 +1097,7 @@
                             <li><strong>Mandalorian Helmet (P10):</strong> $13,581 profit at 51.2% margin - Solid volume and margin</li>
                             <li><strong>Iron Throne Miniature (P15):</strong> $12,073 profit at 52.6% margin - Consistent performer</li>
                         </ul>
-                        <p><em>Key Insight: These 5 products alone generate $86,362 in gross profit (likely >50% of total portfolio profit)</em></p>
+                        <p><em>Key Insight: These 5 products alone generate $86,362 in gross profit (~47% of total portfolio profit)</em></p>
                         
                         <p><strong>Volume Leaders:</strong></p>
                         <ul>
@@ -1216,7 +1212,7 @@
                             <li><strong>Total Portfolio Revenue:</strong> Should equal $381,755</li>
                             <li><strong>Total Portfolio Gross Profit:</strong> Should equal $184,880</li>
                             <li><strong>Product Count:</strong> Exactly 20 products in final output</li>
-                            <li><strong>Manual Verification Example:</strong> Dragon Egg Replica: 151 units × $290.07 avg price = $43,800.38 ✓</li>
+                            <li><strong>Manual Verification Example:</strong> Dragon Egg Replica: 151 units × $290.07 average selling price = $43,800.38 in revenue ✓</li>
                             <li><strong>Margin Check:</strong> Dragon Egg: ($27,190.38 / $43,800.38) × 100 = 62.1% ✓</li>
                             <li><strong>No Negative Margins:</strong> All products should have positive profit margins</li>
                             <li><strong>Highest Margin:</strong> Cross-Universe Mystery Box at 62.9%</li>
@@ -1229,20 +1225,20 @@
                             <li><strong>Bar Chart:</strong> Top 10 products by gross profit - Dragon Egg ($27,190) to Time Turner ($7,629)</li>
                             <li><strong>Waterfall Chart:</strong> Show how $381,755 revenue becomes $184,880 profit</li>
                             <li><strong>Bubble Chart:</strong> Margin vs. Revenue with bubble size = Volume (Butterbeer will be huge bubble, low margin)</li>
-                            <li><strong>Pareto Chart:</strong> Show that top 5 products drive ~41% of total profit</li>
+                            <li><strong>Pareto Chart:</strong> Show that top 5 products drive ~47% of total profit</li>
                         </ul>
                         
                         <p><strong>Segmentation Ideas (Applied to Real Data):</strong></p>
                         <ul>
-                            <li><strong>By Margin Quartiles:</strong> Premium (>55%): 7 products | Good (45-55%): 5 products | Moderate (30-45%): 5 products | Poor (<30%): 3 products</li>
-                            <li><strong>2×2 Matrix:</strong> Stars (High Volume + High Margin): Dragon Egg, Death Star | Cash Cows (High Volume + Low Margin): Butterbeer | Dogs (Low Volume + Low Margin): Lembas Bread, Map Poster</li>
+                            <li><strong>By Margin Quartiles:</strong> Premium (>55%): 5 products | Good (45-55%): 11 products | Moderate (30-45%): 2 products | Poor (<30%): 2 products</li>
+                            <li><strong>2×2 Matrix:</strong> Stars (High Profit + High Margin): Dragon Egg, Death Star | Cash Cows (High Profit + Low Margin): Butterbeer | Dogs (Low Profit + Low Margin): Lembas Bread, Map Poster</li>
                             <li><strong>By Price Point:</strong> Ultra-Premium (>$200 avg): Limited Edition Prop | Premium ($100-200): Dragon Egg, Death Star | Mid-Range ($50-100): Most products | Budget (<$50): Butterbeer, Lembas</li>
-                            <li><strong>Above/Below Portfolio Average (49.4% margin):</strong> 12 products above, 8 products below</li>
+                            <li><strong>Above/Below Portfolio Average (48.4% margin):</strong> 12 products above, 8 products below</li>
                         </ul>
                         
                         <p><strong>Benchmarking Approach (With Real Numbers):</strong></p>
                         <ul>
-                            <li><strong>Portfolio Average Margin:</strong> 49.4% (use as benchmark)</li>
+                            <li><strong>Portfolio Average Margin:</strong> 48.4% (use as benchmark)</li>
                             <li><strong>Significantly Above Average (>55%):</strong> Cross-Universe Mystery Box (62.9%), Dragon Egg (62.1%), Valyrian Dagger (59.4%), Limited Edition Prop (59.4%), Direwolf Pendant (55.8%)</li>
                             <li><strong>Significantly Below Average (<40%):</strong> Butterbeer (17.0%), Lembas Bread (25.7%), Lightsaber Toy (31.9%), Map Poster (34.0%)</li>
                             <li><strong>Performance Gap:</strong> 45.9 percentage point difference between best (62.9%) and worst (17.0%) margins</li>
